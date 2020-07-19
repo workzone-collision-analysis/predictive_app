@@ -107,6 +107,7 @@ Promise.all([
                           create_time: document.getElementById('input-create-time').value,
                           close_date: document.getElementById('input-close-date').value,
                           close_time: document.getElementById('input-close-time').value };
+            console.log(data);
             $.ajax({
                 type:'POST',
                 contentType:'application/json',
