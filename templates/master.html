@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>NYC Collision and 511 events Dashboard</title>
+    <title>Work zone crash rate prediction</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link href="{{ url_for('static', filename='css/bootstrap-grid.min.css') }}" rel='stylesheet'/>
@@ -64,11 +64,11 @@
                     <h2>How to use?</h2>
                     <ul>
                         <li>1. Click the segment</li>
-                        <li>2. Choose a create and close time of 511 event</li>
+                        <li>2. Choose a create and close time of day work zone</li>
                         <li>3. Make sure every value is chosen correctly</li>
                         <li>4. Click 'Submit'</li>
                         <li>5. Click the polygons on the map</li>
-                        <li>- Please make sure the duration of 511 event is less than 24 hours</li>
+                        <li>- Please make sure the temporal duration of a work zone is less than 24 hours</li>
                         <li>- Please make sure that roadway type is 'Street', 'Highway', 'Bridge', 'Tunnel', or 'Ramp'</li>
                         <li>- Press ctrl + shift + r,  if you have some problem.</li>
                     </ul>
