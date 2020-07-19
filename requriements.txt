@@ -1,0 +1,30 @@
+attrs==19.3.0
+certifi==2020.6.20
+click==7.1.2
+click-plugins==1.1.1
+cligj==0.5.0
+Fiona==1.8.13.post1
+Flask==1.1.2
+GDAL==3.0.2
+geopandas @ file:///tmp/build/80754af9/geopandas_1594937497867/work
+itsdangerous==1.1.0
+Jinja2==2.11.2
+joblib==0.16.0
+MarkupSafe==1.1.1
+mkl-fft==1.1.0
+mkl-random==1.1.1
+mkl-service==2.3.0
+munch==2.5.0
+numpy==1.18.5
+pandas @ file:///C:/ci/pandas_1592833613419/work
+pyproj==2.6.1.post1
+python-dateutil==2.8.1
+pytz==2020.1
+Rtree==0.9.4
+scikit-learn==0.23.1
+scipy==1.5.1
+Shapely==1.7.0
+six==1.15.0
+threadpoolctl==2.1.0
+Werkzeug==1.0.1
+wincertstore==0.2
