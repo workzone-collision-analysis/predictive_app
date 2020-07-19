@@ -6,8 +6,6 @@ from fiona.crs import from_epsg
 
 from flask import Flask
 from flask import render_template, request, jsonify
-from sklearn.externals import joblib
-
 
 app = Flask(__name__)
 
@@ -38,7 +36,7 @@ def results():
     return buffer_segment(gpd.GeoSeries([polygon])).to_json()
 
 def main():
-    app.run(host=app.config.get("HOST", "localhost"),port=app.config.get("PORT", 9000))
+    app.run()
 
 if __name__ == '__main__':
     main()
