@@ -3,7 +3,6 @@ import pandas as pd
 import geopandas as gpd
 from shapely.geometry import LineString
 from fiona.crs import from_epsg
-
 from flask import Flask
 from flask import render_template, request, jsonify
 
