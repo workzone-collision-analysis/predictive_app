@@ -2,6 +2,7 @@ import json
 import pandas as pd
 import geopandas as gpd
 from shapely.geometry import LineString
+import joblib
 from fiona.crs import from_epsg
 from flask import Flask
 from flask import render_template, request, jsonify
@@ -29,13 +30,10 @@ def index():
 def results():
     data = request.get_json()
     print(data)
-    print(data['coords'])
-    print(pd.DataFrame(data))
-    polygon = LineString(data['coords'])
     return buffer_segment(gpd.GeoSeries([polygon])).to_json()
 
 def main():
-    app.run()
+    app.run(host=app.config.get("HOST", "localhost"),port=app.config.get("PORT", 9000))
 
 if __name__ == '__main__':
     main()
