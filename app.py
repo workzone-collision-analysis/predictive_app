@@ -195,7 +195,7 @@ def results():
     return gdf_511.to_json()
 
 def main():
-    app.run(host=app.config.get("HOST", "localhost"),port=app.config.get("PORT", 9000))
+    app.run()
 
 if __name__ == '__main__':
     main()
