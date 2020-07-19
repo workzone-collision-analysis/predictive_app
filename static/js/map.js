@@ -8,11 +8,11 @@ let popup;
 const popupTemplate511 =
     '<div class="map__popup">\n' +
     '<h4>511 Event information</h4>\n'+
-    '<p>Crash Probability (within 900ft): <span id="511-info__Crash"></span></p>\n' +
+    '<p>Crash Probability (within 900ft, %): <span id="511-info__Crash"></span></p>\n' +
     '<p>Created Time: <span id="511-info__CreateTime"></span></p>\n' +
     '<p>Closed Time: <span id="511-info__CloseTime"></span></p>\n' +
     '<p>Duration (hour): <span id="511-info__Duration"></span></p>\n' +
-    '<p>Peak-time duration: <span id="511-info__PeakDuration"></span></p>\n' +
+    '<p>Peak-time duration (hour): <span id="511-info__PeakDuration"></span></p>\n' +
     '<p>Roadway Type: <span id="511-info__Roadway"></span></p>\n' +
     '<p>Posted Speed: <span id="511-info__Speed"></span></p>\n' +
     '<p>Street Width: <span id="511-info__Width"></span></p>\n'+
@@ -87,9 +87,9 @@ Promise.all([
             const target = segmentAttribute.filter(d=>d.id === clicked_feature.id)[0];
             if(target !== undefined){
                 document.getElementById('input-shst_id').innerText = clicked_feature.id;
-                document.getElementById('input-roadway-type').value = target.roadway_type;
-                document.getElementById('input-street-width').value = target.street_width;
-                document.getElementById('input-posted-speed').value = target.posted_speed;
+                document.getElementById('input-roadway-type').value = ((target['roadway_type']!=='-1.0')&&target['roadway_type']!=='Unknown')?target['roadway_type']:'-';
+                document.getElementById('input-street-width').value = ((target['posted_speed']!=='-1')&&(target['posted_speed']!=='-1.0'))?target['posted_speed']:'-';
+                document.getElementById('input-posted-speed').value =  ((target['street_width']!=='-1')&&(target['street_width']!=='-1.0'))?target['street_width']:'-';
             } else {
                 alert("data is missing, plz fill the form");
             }
@@ -97,6 +97,7 @@ Promise.all([
         });
 
         $("#submit_button").click(function(){
+            console.log(document.getElementById('input-create-time').value);
             const data = {id: document.getElementById('input-shst_id').innerText,
                           coords: coords,
                           roadway_type: document.getElementById('input-roadway-type').value,
@@ -104,8 +105,8 @@ Promise.all([
                           posted_speed: document.getElementById('input-posted-speed').value,
                           create_date: document.getElementById('input-create-date').value,
                           create_time: document.getElementById('input-create-time').value,
-                          create_date: document.getElementById('input-close-date').value,
-                          create_time: document.getElementById('input-close-time').value };
+                          close_date: document.getElementById('input-close-date').value,
+                          close_time: document.getElementById('input-close-time').value };
             $.ajax({
                 type:'POST',
                 contentType:'application/json',
@@ -113,7 +114,7 @@ Promise.all([
                 dataType:'json',
                 data: JSON.stringify(data),
                 success : function(result){
-                    console.log(data['id']);
+                    console.log(result);
                     console.log(result.features[0].geometry);
                     map.addSource(data['id'],{
                         'type': 'geojson',
@@ -121,13 +122,20 @@ Promise.all([
                             'type': 'Feature',
                             'geometry': result.features[0].geometry}
                     });
+                    const target = result.features[0]['properties'];
+                    let opacity;
+                    if((target['cluster']==0)||(target['cluster']==4)){
+                        opacity=0.8;
+                    } else{
+                        opacity=0.6;
+                    }
                     map.addLayer({
                         'id': data['id'],
                         'source': data['id'],
                         'type': 'fill',
                         'paint': {
                             'fill-color': '#F44336',
-                            'fill-opacity':0.3,
+                            'fill-opacity':opacity,
                             'fill-outline-color': '#F44336'
                         }
                     });
@@ -144,7 +152,18 @@ Promise.all([
                             .setLngLat([lngAverage,latAverage])
                             .setHTML(popupTemplate511)
                             .addTo(map);
-                    })
+                        document.getElementById('511-info__Crash').innerText = target['crash_rate'];
+                        document.getElementById('511-info__CreateTime').innerText = target['create_time'];
+                        document.getElementById('511-info__CloseTime').innerText = target['close_time'];
+                        document.getElementById('511-info__Duration').innerText = Math.round(target['duration']*100)/100
+                        document.getElementById('511-info__PeakDuration').innerText = Math.round(target['peak_duration']*100)/100
+                        document.getElementById('511-info__Roadway').innerText = data['roadway_type'];
+                        document.getElementById('511-info__Speed').innerText = data['posted_speed'];
+                        document.getElementById('511-info__Width').innerText = data['street_width'];
+
+                    });
+
+
                 },
                 error : function(result){
                     alert('Please check the inputs again')
