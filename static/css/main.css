@@ -1,0 +1,29 @@
+@import "reset.css";
+@import "https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&display=swap";
+@import "map.css";
+@import "form.css";
+@import "responsive.css";
+
+html, body{
+    height:99vh;
+    margin:auto;
+    font-family: Lato, sans-serif;
+}
+
+.container-fluid{
+    height:100%;
+}
+
+.container__main{
+    margin:0;
+    max-width:1280px;
+}
+
+.row{
+    display:flex;
+    flex-direction: row;
+    height:100%;
+}
+
+
+
