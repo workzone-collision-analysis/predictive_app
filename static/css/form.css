@@ -35,7 +35,6 @@
 }
 
 .form__information h2{
-    margin-top:15px;
     font-size:20px;
     margin-bottom:15px;
 }
@@ -43,5 +42,5 @@
 .form__information ul li{
     font-size:15px;
     margin-bottom:10px;
-    line-height: 20px;
+    line-height: 18px;
 }
