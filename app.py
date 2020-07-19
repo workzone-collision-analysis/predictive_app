@@ -94,8 +94,8 @@ def results():
     data = request.get_json()
     print(data)
     df_511 = pd.DataFrame(index=[0])
-    df_511['create_time'] = pd.to_datetime(data['create_date'] +' '+ data ['create_time'])
-    df_511['close_time'] = pd.to_datetime(data['close_date'] +' '+ data ['close_time'])
+    df_511['create_time'] = pd.to_datetime(data['create_date'] +' '+ data['create_time'])
+    df_511['close_time'] = pd.to_datetime(data['close_date'] +' '+ data['close_time'])
     create_season = df_511['create_time'].apply(lambda x:season(x)).tolist()[0]
     create_weekday = df_511['create_time'].apply(lambda x:is_weekday(x)).tolist()[0]
     df_511['duration'] = df_511['close_time'] -  df_511['create_time']
