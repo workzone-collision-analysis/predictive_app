@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
     <title>Work zone crash rate prediction</title>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -14,69 +14,99 @@
     <link href="{{ url_for('static', filename='css/main.css') }}" rel='stylesheet'/>
 </head>
 <body>
-    <main class="container-fluid">
-        <div class="row">
-            <section class="col-md-12 col-lg-8" id="map">
+<main class="container-fluid">
+    <div class="row">
+        <section class="col-md-12 col-lg-8" id="map">
 
-                <div id="map__map">
+            <div id="map__map">
 
+            </div>
+
+        </section>
+        <section class="col-md-12 col-lg-4" id="form_511">
+            <form action="/results" method="post">
+                <div class="row">
+                    <p>SharedStreet ID: <span id="input-shst_id">Please click a segment</span></p>
                 </div>
-
-            </section>
-            <section class="col-md-12 col-lg-4" id="form_511">
-                <form action="/results" method="post">
-                    <div class="row">
-                        <p>SharedStreet ID: <span id="input-shst_id">Please click a segment</span></p>
-                    </div>
-                    <div class="row">
-                        <p>Street width:</p>
-                        <input id="input-street-width" name="street-width" value="fill the form">
-                    </div>
-                    <div class="row">
-                        <p>Roadway type:</p>
-                        <input id="input-roadway-type"  value="fill the form">
-                    </div>
-                    <div class="row">
-                        <p>Posted Speed:</p>
-                        <input id="input-posted-speed"  value="fill the form">
-                    </div>
-                    <div class="row">
-                        <p>Create Date:</p>
-                        <input id="input-create-date" type="date">
-                    </div>
-                    <div class="row">
-                        <p>Create time:</p>
-                        <input id="input-create-time" type="time">
-                    </div>
-                    <div class="row">
-                        <p>Close Date:</p>
-                        <input id="input-close-date" type="date">
-                    </div>
-                    <div class="row">
-                        <p>Close time:</p>
-                        <input id="input-close-time" type="time">
-                    </div>
-                </form>
-                <div class="row" id="input-button">
-                    <button id="submit_button">Submit</button>
+                <div class="row">
+                    <p>Street width:</p>
+                    <input id="input-street-width" name="street-width" value="fill the form">
                 </div>
-                <div class="form__information">
-                    <h2>How to use?</h2>
-                    <ul>
-                        <li>1. Click the segment</li>
-                        <li>2. Choose a create and close time of day work zone</li>
-                        <li>3. Make sure every value is chosen correctly</li>
-                        <li>4. Click 'Submit'</li>
-                        <li>5. Click the polygons on the map</li>
-                        <li>- Please make sure the temporal duration of a work zone is less than 24 hours</li>
-                        <li>- Please make sure that roadway type is 'Street', 'Highway', 'Bridge', 'Tunnel', or 'Ramp'</li>
-                        <li>- Press ctrl + shift + r,  if you have some problem.</li>
-                    </ul>
-
+                <div class="row">
+                    <p>Roadway type:</p>
+                    <input id="input-roadway-type" value="fill the form">
                 </div>
-            </section>
+                <div class="row">
+                    <p>Posted Speed:</p>
+                    <input id="input-posted-speed" value="fill the form">
+                </div>
+                <div class="row">
+                    <p>Create Date:</p>
+                    <input id="input-create-date" type="date">
+                </div>
+                <div class="row">
+                    <p>Create time:</p>
+                    <input id="input-create-time" type="time">
+                </div>
+                <div class="row">
+                    <p>Close Date:</p>
+                    <input id="input-close-date" type="date">
+                </div>
+                <div class="row">
+                    <p>Close time:</p>
+                    <input id="input-close-time" type="time">
+                </div>
+            </form>
+            <div class="row" id="input-button">
+                <button id="submit_button">Submit</button>
+            </div>
+            <div class="form__information">
+                <h2>How to use?</h2>
+                <ul>
+                    <li>1. Click a segment corresponding the planned work location</li>
+                    <li>2. Choose a create and close time of planned work</li>
+                    <li>3. Click 'Submit'</li>
+                    <li>4. Click the polygons on the map</li>
+                    <li>5. Click the polygons on the map</li>
+                </ul>
+                <h2>Note</h2>
+                <ul>
+                    <li>Total work duration must be less than 24 hours</li>
+                    <li>Planned work must be on a 'Street', 'Highway', 'Bridge', 'Tunnel', or 'Ramp'</li>
+                    <li>To refresh press ctrl + shift + r</li>
+                </ul>
+
+            </div>
+        </section>
+    </div>
+    <div id="modal">
+        <div id="modal__window">
+            <div class="row" id="window-title">
+                <h1>Work Zone Collision Probability Prediction</h1>
+            </div>
+
+            <p>This is a k-means clustering based predictive application to calculate the collision probability of a
+                crash within 900 feet of a roadway construction work zone. For more information visit this website.</p>
+
+            <h2>How to use?</h2>
+            <ul>
+                <li>1. Click a segment corresponding the planned work location</li>
+                <li>2. Choose a create and close time of planned work</li>
+                <li>3. Click 'Submit'</li>
+                <li>4. Click the polygons on the map</li>
+                <li>5. Click the polygons on the map</li>
+            </ul>
+            <h2>Note</h2>
+            <ul>
+                <li>Total work duration must be less than 24 hours</li>
+                <li>Planned work must be on a 'Street', 'Highway', 'Bridge', 'Tunnel', or 'Ramp'</li>
+                <li>To refresh press ctrl + shift + r</li>
+            </ul>
+
+            <button onclick="modal_close()">Close</button>
         </div>
-    </main>
-    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+    </div>
+</main>
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
 </body>
 </html>

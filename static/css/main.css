@@ -26,4 +26,78 @@ html, body{
 }
 
 
+#modal{
+    display:flex;
+    width:100%;
+    height:100%;
+    justify-content: center;
+    align-items: center;
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:3;
+    background-color: rgba(0,0,0,0.2);
+}
+
+#modal #modal__window{
+    display:flex;
+    background-color: #FFFFFF;
+    padding:20px;
+    flex-direction: column;
+    overflow-y:scroll;
+}
+
+#modal__window h1{
+    font-weight:700;
+    font-size:20px;
+}
+
+#modal__window button{
+    height: 30px;
+    border:1px solid #212121;
+    background-color:#FFFFFF;
+    border-radius:5px;
+    font-weight:400;
+    font-size:18px;
+    margin-top:20px;
+}
+
+#window-title{
+    justify-content: space-between;
+    padding-left: 0;
+    padding-right:20px;
+    align-items: center;
+    margin: 0;
+    min-height:50px;
+}
+
+#window-title h1{
+    font-size:25px;
+    margin-bottom:20px;
+}
+
+#modal__window button:hover{
+    color:#FFFFFF;
+    background-color:#424242;
+    font-weight:700;
+}
+
+#modal__window p{
+    font-size:18px;
+    line-height:25px;
+    margin-bottom:20px;
+}
+
+#modal__window h2{
+    font-size:20px;
+    margin-bottom:10px;
+    margin-top:10px;
+    font-weight:700;
+}
+#modal__window ul li{
+    font-size:15px;
+    line-height:20px;
+    margin-bottom:10px;
+}
+
 

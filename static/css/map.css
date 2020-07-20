@@ -28,6 +28,7 @@
 .mapboxgl-popup-content{
     background-color: #525252;
     color:#FFFFFF;
+    width:250px;
 }
 
 .mapboxgl-popup-close-button{

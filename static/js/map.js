@@ -7,8 +7,8 @@ let popup;
 
 const popupTemplate511 =
     '<div class="map__popup">\n' +
-    '<h4>511 Event information</h4>\n'+
-    '<p>Crash Probability (within 900ft, %): <span id="511-info__Crash"></span></p>\n' +
+    '<h4>Work Zone information</h4>\n'+
+    '<p>Crash Probability (within 900ft): <span id="511-info__Crash"></span> %</p>\n' +
     '<p>Created Time: <span id="511-info__CreateTime"></span></p>\n' +
     '<p>Closed Time: <span id="511-info__CloseTime"></span></p>\n' +
     '<p>Duration (hour): <span id="511-info__Duration"></span></p>\n' +
@@ -17,6 +17,11 @@ const popupTemplate511 =
     '<p>Posted Speed: <span id="511-info__Speed"></span></p>\n' +
     '<p>Street Width: <span id="511-info__Width"></span></p>\n'+
     '</div>';
+
+function modal_close(){
+    document.getElementById('modal').style.display='none';
+}
+
 
 //import map
 Promise.all([

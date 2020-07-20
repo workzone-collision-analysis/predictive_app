@@ -6,6 +6,15 @@
         height:100%;
         flex-direction: column;
     }
+
+    #modal #modal__window{
+        width:800px;
+        height:600px;
+    }
+
+    #window-title{
+        display:flex;
+    }
 }
 
 @media screen and (min-width:751px) and (max-width:991px){
@@ -17,6 +26,16 @@
         flex-direction: column;
     }
 
+    #modal #modal__window{
+        width:80%;
+        min-height:70%;
+    }
+
+    #window-title{
+        display:flex;
+    }
+
+
 }
 
 @media screen and (max-width:750px) {
@@ -27,5 +46,14 @@
     #form_511{
         min-height:40%;
         flex-direction: column;
+    }
+
+    #modal #modal__window{
+        width:90%;
+        height:90%;
+    }
+
+    #window-title{
+        display:none;
     }
 }
